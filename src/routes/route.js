@@ -3,7 +3,7 @@ const { welcome } = require('./intro.js');
 const router = express.Router();
 const path =require("../logger/logger" )
 const path_1 =require("../util/helper")
-const path_3=require("../routes/validator/formatter.js")
+const path_3=require("../validator/formatter.js")
 
 
 
