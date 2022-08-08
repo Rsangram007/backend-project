@@ -34,5 +34,65 @@ router.get('/student-details/:name', function(req, res){
     
     res.send('Dummy response')
 })
+// 
+router.get('/movies', function (req, res) {
+    let movies=["Rang de basanti", "The shining", "Lord of the rings", "Batman begins"]
+    res.send(movies)
+    
+  })
+  router.get('/get-movies/:indexNumber',function(req,res){
+    let movies=["Rang de basanti", "The shining", "Lord of the rings", "Batman begins"]
+    let index=req.params.indexNumber
+    console.log(movies[index])
+    res.send(movies[index])
+  })
+  router.get('/get-movies/:indexNumber',function(req,res){
+    let moviesName=["Rang de basanti", "The shining", "Lord of the rings", "Batman begins"]
+    let index=req.params.indexNumber
+    if(index>moviesName.length){
+        return res.send("use a valid index")
+    }else{res.send(moviesName[index])
+    }
+  })
+  router.get('/getFilms',function(req,res){
+    let moviesName=[ {
+        'id': 1,
+        'name': 'The Shining'
+       }, {
+        'id': 2,
+        'name': 'Incendies'
+       }, {
+        'id': 3,
+        'name': 'Rang de Basanti'
+       }, {
+        'id': 4,
+        'name': 'Finding Nemo'
+       }]
+       res.send(moviesName)
+       
+  })
 
+  router.get('/getFilms/:indexNumber',function(req ,res){let moviesName=[ {
+    'id': 1,
+    'name': 'The Shining'
+   }, {
+    'id': 2,
+    'name': 'Incendies'
+   }, {
+    'id': 3,
+    'name': 'Rang de Basanti'
+   }, {
+    'id': 4,
+    'name': 'Finding Nemo'
+   }]
+   let index =req.params.indexNumber
+   if(index>moviesName.length){
+    return req.send("no movie exist with this id")
+   }else{res.send(moviesName[index])
+
+        }
+    }
+   
+
+  )
 module.exports = router;
