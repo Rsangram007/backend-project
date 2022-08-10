@@ -119,3 +119,9 @@ const { application } = require('express');
 
 module.exports = router;
 // adding this comment for no reason
+router.post('/test-me',function(req,res){
+    res.send({msg:"Sangram",status:'raja'})
+    console.log(req.body)
+    let id=req.body.user
+    console.log(id)
+})
