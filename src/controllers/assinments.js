@@ -2,9 +2,13 @@ const { count } = require("console")
 const authormodel=require("../models/Author.js")
 const bookmodel=require("../models/Book.js")
 
-
+ 
 const createauthor= async function (req, res) {
     let data= req.body
+    let input=req.body.author_id
+    if(!data== input){
+        res.send({msg:"plz enter author id"})
+    }
     let savedData= await authormodel.create(data)
     res.send({msg: savedData})
 }
@@ -28,7 +32,7 @@ const authorname=async function(req,res){
     res.send({msg:authornames,price})
 }
  const bookprice=async function(req,res){
-    let onprice=await bookmodel.find({$gte:50,$lte:100}).select({name:1,_id:0,price:1})
+    let onprice=await bookmodel.find({$gte:50,$lte:100}).select({name:1,author_id:1,_id:0,price:1})
     let abc=onprice.map(x=>x.author_id)
     let newauthor=await authormodel.find({author_id:abc}).select({author_name:1,_id:0})
     res.send({"book&itsprice":onprice,"Authorname":newauthor})
@@ -40,6 +44,5 @@ module.exports.book=createBook
 module.exports.qustwo=chetanbook
 module.exports.qusthree=authorname
 module.exports.qusfour=bookprice
-
 
 
