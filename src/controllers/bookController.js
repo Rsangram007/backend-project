@@ -1,10 +1,15 @@
 const { count } = require("console")
 const BookModel= require("../models/bookModel")
+const xxx=require("../models/Book")
 
 const createBook= async function (req, res) {
     let data= req.body
-
     let savedData= await BookModel.create(data)
+    res.send({msg: savedData})
+}
+const Books= async function (req, res) {
+    let data= req.body
+    let savedData= await xxx.create(data)
     res.send({msg: savedData})
 }
 
@@ -54,6 +59,7 @@ const deleteBooks= async function (req, res) {
 
 
 module.exports.createBook= createBook
+module.exports.Book= Books
 module.exports.getBooksData= getBooksData
 module.exports.updateBooks= updateBooks
 module.exports.deleteBooks= deleteBooks
