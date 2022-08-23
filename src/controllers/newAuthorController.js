@@ -8,12 +8,6 @@ const newAuthor= async function (req, res) {
 }
 
 
-const authorid= async function (req, res) {
-    let input=req.body
-    let data =input.authorid
-    let savedata=await authorModel.find()
-    res.send({data: books})
-}
+
 
 module.exports.newAuthor=newAuthor
-module.exports.authorid=authorid
