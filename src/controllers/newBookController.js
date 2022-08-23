@@ -8,36 +8,81 @@ const newBook= async function (req, res) {
     res.send({data: bookCreated})
 }
 /// (3)
-const newBooks = async function (req, res) {
-    let data = req.body
-    let author = req.body.author
-    let publisher = req.body.publisher
-    let authorid = await authormodel.find({ _id: author })
-    let publisherid = await publisherModel.find({ _id: publisher })
-    if (!author) {
-        res.send("Author ID is required.")
-    }
-    else if (!authorid[0]) {
-        res.send("Not a valid author ID.")
-    }
-    else if (!publisher) {
-        res.send("Publisher ID is required.")
-    }
-    else if (!publisherid[0]) {
-        res.send("Not a valid publisher ID.")
-    }
-    else {
-        let book = await bookmodel.create(data)
-        res.send(book)
+// const newBooks = async function (req, res) {
+//     let data = req.body
+//     let author = req.body.author
+//     let publisher = req.body.publisher
+//     let authorid = await authormodel.find({ _id: author })
+//     let publisherid = await publisherModel.find({ _id: publisher })
+//     if (!author) {
+//         res.send("Author ID is required.")
+//     }
+//     else if (!authorid[0]) {
+//         res.send("Not a valid author ID.")
+//     }
+//     else if (!publisher) {
+//         res.send("Publisher ID is required.")
+//     }
+//     else if (!publisherid[0]) {
+//         res.send("Not a valid publisher ID.")
+//     }
+//     else {
+//         let book = await bookmodel.create(data)
+//         res.send(book)
+//     }
+
+// }
+//// or
+const newBooks= async function (req, res) {
+    let book = req.body
+
+    //3 a)
+    if(!book.author) {
+        return res.send({status: false, msg: "author id is a mandatory field"})
     }
 
+    //3 b)
+    let author = await authormodel.findById(book.author)
+    if(!author) {
+        return res.send({status: false, msg: "Author id is not valid"})
+    }
+
+    //3 c)
+    if(!book.publisher) {
+        return res.send({status: false, msg: "Publisher id is a mandatory field"})
+    }
+
+    // 3 d)
+    let publisher = await publisherModel.findById(book.publisher)
+    if(!publisher) {
+        return res.send({status: false, msg: "Publisher id is not valid"})
+    }
+
+    let bookCreated = await bookmodel.create(book)
+    res.send({data: bookCreated})
 }
-///(4)
+
 const getBooksWithAuthorDetails = async function (req, res) {
-    let specificBook = await bookmodel.find().populate(["publisher", 'author'])
-    res.send({ data: specificBook })
+    let allBooks = await bookModel.find().populate('author publisher')
+    res.send({data: allBooks})
 
 }
+
+
+
+
+
+
+
+
+
+
+///(4)
+//const getBooksWithAuthorDetails = async function (req, res) {
+    // let specificBook = await bookmodel.find().populate(["publisher", 'author'])
+    // res.send({ data: specificBook })
+
+//}
 const abc=async function(req,res){
     let total=await authormodel.aggregate([
 {$group:{_id:"$authorName",totalno:{$sum:"$rating"}}},{$sort:{totalno:-1}}])
