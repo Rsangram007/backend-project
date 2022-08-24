@@ -11,8 +11,8 @@ router.post("/newPublisher", publisherController.new)
 router.post("/newBook", bookController.newBook)
 router.post("/newBooks", bookController.newBooks)
 router.get("/newBooks", bookController.abc)
-router.get("/updatepub", bookController.updatepub)
-router.get("/updateprice", bookController.updateprice)
+router.put("/updatepub", bookController.updatepub)
+router.put("/updateprice", bookController.updateprice)
 
 
 
