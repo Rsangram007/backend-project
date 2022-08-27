@@ -39,6 +39,8 @@ const Order = async function (req, res) {
     let savedData = await ordermodel.create(data)
     res.send({ msg: savedData })
 }
+
+
 const orderdetails = async function (req, res) {
     let savedata = req.body
     let freeAppUser = req.headers.isFreeAppUser

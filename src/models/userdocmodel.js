@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { isFreeAppUser } = require('../middlewares/assinmentmiddleware');
+ 
 
 const userdocmodelSchema = new mongoose.Schema({
     name: String,

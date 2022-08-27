@@ -1,6 +1,3 @@
-const { count } = require("console")
-const { nextTick } = require("process")
-const { isFreeAppUser } = require("../middlewares/assinmentmiddleware")
 const usermodel = require("../models/userdocmodel")
 
 

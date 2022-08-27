@@ -1,4 +1,4 @@
-const { count } = require("console")
+
 const productmodel= require("../models/productdocmodel")
    
 
