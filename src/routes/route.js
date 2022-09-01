@@ -58,5 +58,14 @@ router.get("/basicRoute", commonMW.mid1, commonMW.mid2, commonMW.mid3, commonMW.
 
 
 
+router.post("/users", userController.User)
+router.post("/Loginuser", userController.loginUser)
+router.get("/detailsuser/:userId",middleware.authenticate,middleware.authorise, userController. getUserData)
+router.put("/updateuser/:userId",middleware.authenticate,middleware.authorise, userController.  updateUser)
+
+
+
+
+
 
 module.exports = router;
