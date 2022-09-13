@@ -56,7 +56,7 @@ const createAuthor = async (req, res) => {
     }
 
     let createAuthor = await authorModel.create(data);
-    res.status(201).send({ data: createAuthor, status: true });
+    res.status(200).send({ data: createAuthor, status: true ,message: "author created" });
   } catch (err) {
     res.status(500).send({ msg: err.message });
   }

@@ -1,9 +1,6 @@
 const blogsModel = require("../model/blogsModel");
-
 const authorModel = require("../model/authorModel");
-
 const mongoose = require("mongoose");
-
 const moment = require("moment");
 
 // ------------ createBlog --------------//
@@ -69,22 +66,17 @@ const getBlogs = async (req, res) => {
     queryData["isDeleted"] = false;
 
     let authorId = req.query.authorId;
-
     if (authorId == "")
-      return res
-        .status(400)
-        .send({ status: false, msg: "Please enter a Author Id" });
+      return res .status(400).send({ status: false, msg: "Please enter a Author Id" });
 
     if (authorId && !mongoose.isValidObjectId(authorId))
-      return res
-        .status(400)
-        .send({ status: false, msg: "please enter valid authorID" });
+      return res .status(400).send({ status: false, msg: "please enter valid authorID" });
 
     const data = await blogsModel.find(queryData);
-
     if (data.length == 0)
       return res.status(404).send({ status: false, msg: "No data found" });
     return res.status(200).send({ status: true, data: data });
+
   } catch (err) {
     res.status(500).send({ status: false, msg: err.message });
   }
@@ -111,7 +103,6 @@ const putBlogs = async (req, res) => {
           title: data.title,
           body: data.body,
           category: data.category,
-          
           isPublished: true,
         },
         $push: {
@@ -139,9 +130,8 @@ const deleteBlog = async (req, res) => {
       return res.status(404).send({ status: false, msg: "No Such blog" });
 
     if (checkBlog.isDeleted == true)
-      return res
-        .status(400)
-        .send({ status: false, msg: "No such blog available to delete" });
+      return res .status(400) .send({ status: false, msg: "No such blog available to delete" });
+
     const data = await blogsModel.findOneAndUpdate(
       { _id: blogId },
       { $set: { isDeleted: true, deletedAt: dateTime } },
@@ -174,6 +164,7 @@ const deleteQuery = async (req, res) => {
    return res.status(500).send({ status: false, msg: err.message });
   }
 };
+
 
 module.exports.CreateBlog = CreateBlog;
 module.exports.getBlogs = getBlogs;

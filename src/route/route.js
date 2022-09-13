@@ -16,20 +16,10 @@ router.post("/blogs", blogsController.CreateBlog); // 2nd api hit
 
 router.get("/blogs", middleware.authentication, blogsController.getBlogs); // 3rd api
 
-router.put(
-  "/blogs/:blogId",
-  middleware.authentication,
-  middleware.authorization,
-  blogsController.putBlogs
-); // 4th api
+router.put("/blogs/:blogId",middleware.authentication,middleware.authorization, blogsController.putBlogs); // 4th api
 //,middleware.authentication,middleware.authorization
 
-router.delete(
-  "/blogs/:blogId",
-  middleware.authentication,
-  middleware.authorization,
-  blogsController.deleteBlog
-); //5 th api
+router.delete("/blogs/:blogId",middleware.authentication, middleware.authorization, blogsController.deleteBlog); //5 th api
 //,middleware.authentication,middleware.authorization
 
 router.delete("/blogs", middleware.authentication,blogsController.deleteQuery); //6th api
